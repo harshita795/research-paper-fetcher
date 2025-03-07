@@ -32,22 +32,29 @@ poetry install
 
 ## 🛠️ Usage
 
+### 🖥️ CLI Options
+The following command-line options are supported:
+
+| Option | Description |
+|--------|-------------|
+| `-h`, `--help` | Show usage instructions. |
+| `-d`, `--debug` | Print debug information during execution. |
+| `-f FILENAME`, `--file FILENAME` | Save results to a CSV file instead of printing to the console. |
+
 ### **1️⃣ Fetch Research Papers (Basic)**
 ```bash
 poetry run get-papers-list "cancer treatment"
 ```
-
-```bash
+```json
 {
-  "PubmedID": "40052396",
-  "Title": "A Green Microwave-Assisted Extraction of Cannabis sativa L.",
-  "Publication Date": "2025 Mar 07",
-  "Non-academic Authors": ["Dr. Smith"],
-  "Company Affiliations": ["Moderna Inc."]
+  "PubmedID": "40038236",
+  "Title": "High baseline levels of PD-L1 reduce the heterogeneity of immune checkpoint signature and sensitize anti-PD1 therapy in lung and colorectal cancers.",
+  "Publication Date": "2025 Mar 04",
+  "Non-academic Authors": ["Wei Xu"],
+  "Company Affiliations": ["New Drug Biology and Translational Medicine, Innovent Biologics Inc., Suzhou, China."],
+  "Corresponding Author Email": "huangyh@suda.edu.cn"
 }
-
 ```
-
 ### **2️⃣ Save Results to CSV**
 ```bash
 poetry run get-papers-list "cancer treatment" --file results.csv
@@ -88,6 +95,18 @@ research-paper-fetcher/
 - Displays **filtered results in JSON format**.
 - Saves results to **CSV (if requested by the user)**.
 
+### **5️⃣ Extracting Corresponding Author Email**
+- The script searches for **email addresses inside the "AffiliationInfo"** field.
+- It uses **regular expressions (`re.search`)** to find patterns like `name@company.com`.
+- If no email is found, the field is set to `"N/A"`.
+
+## 📚 External Tools & Libraries Used
+- **PubMed API** → Used to fetch research papers.
+- **Requests Library** → For making API calls.
+- **Poetry** → Dependency and virtual environment management.
+- **XML Parsing (`xml.etree.ElementTree`)** → Extracts data from PubMed’s XML response.
+- **Regular Expressions (`re` module)** → Extracts emails from author affiliations.
+- **Python Standard Libraries** → Used for JSON processing, error handling, and file operations.
 
 ## ✅ Functional Requirements
 
@@ -108,6 +127,9 @@ research-paper-fetcher/
 - PubMed API does not always return company affiliations → Some results may be "N/A".
 - Industry-funded research may not be clearly labeled in PubMed data.
 - Alternative data sources (e.g., ClinicalTrials.gov) might be needed for better industry research.
+
+## 🗃️ Version Control & GitHub
+This project is managed using **Git for version control** and is hosted on **GitHub**.
 
 ## 📜 License
 This project is licensed under the MIT License.
