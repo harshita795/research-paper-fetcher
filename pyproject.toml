@@ -1,15 +1,48 @@
 [project]
 name = "research-paper-fetcher"
-version = "0.1.3"
-description = ""
+version = "0.1.5"
+description = "A Python tool to fetch research papers from PubMed and save them to CSV."
 authors = [
-    {name = "harshita795",email = "yadavharshita261303@gmail.com"}
+    {name = "harshita795", email = "yadavharshita261303@gmail.com"}
 ]
-readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
     "requests (>=2.30,<3.0)"
 ]
+long_description = """
+# Research Paper Fetcher
+
+`research-paper-fetcher` is a Python package that allows you to search PubMed for research papers based on a query and save the results to a CSV file.
+
+## Features
+- Fetch paper details from PubMed based on a search query.
+- Save paper details (e.g., Title, PubMed ID, Authors, etc.) to a CSV file.
+- Simple command-line interface for easy integration.
+
+## Installation
+
+You can install the package using pip:
+
+pip install research-paper-fetcher
+
+## Usage
+
+After installation, you can use the tool from the command line. For example:
+
+get-papers-list "cancer treatment" --file mypapers.csv
+
+This command will search for papers related to "cancer treatment" and save the results to a CSV file named `mypapers.csv`.
+
+### Arguments:
+- `query`: The search term you want to use on PubMed.
+- `-f, --file`: The name of the CSV file to save the results.
+- `-d, --debug`: Enable debug mode to see more detailed output.
+
+## License
+
+This package is open-source and available under the MIT license.
+"""
+long_description_content_type = "text/markdown"
 
 [tool.poetry]
 packages = [{include = "research_paper_fetcher", from = "src"}]
