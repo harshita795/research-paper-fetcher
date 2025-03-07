@@ -1,5 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
+import re  # Import regular expressions module
 from typing import List, Dict, Optional
 
 # API URLs
@@ -56,9 +57,7 @@ def fetch_paper_ids(query: str, max_results: int = 5) -> List[str]:
 
 def fetch_paper_details(paper_ids: List[str]) -> List[Dict[str, Optional[str]]]:
     """
-    Fetch details (title, authors, affiliations, publication date) for given paper IDs from PubMed.
-
-    Uses `efetch.fcgi` to get full metadata including author affiliations.
+    Fetch details (title, authors, affiliations, publication date, and corresponding author email) for given paper IDs from PubMed.
     """
     if not paper_ids:
         print("Error: No valid paper IDs provided.")
@@ -89,10 +88,11 @@ def fetch_paper_details(paper_ids: List[str]) -> List[Dict[str, Optional[str]]]:
 
             publication_date = f"{pub_year} {pub_month} {pub_day}".strip()
 
-            # Extract author affiliations
+            # Extract author affiliations and corresponding email
             authors = article.findall(".//Author")
             company_authors = []
             company_names = []
+            corresponding_email = "N/A"
 
             for author in authors:
                 last_name = author.find("LastName")
@@ -103,6 +103,12 @@ def fetch_paper_details(paper_ids: List[str]) -> List[Dict[str, Optional[str]]]:
 
                 if affiliation is not None:
                     affiliation_text = affiliation.text
+
+                    # Extract corresponding author email (if available)
+                    email_match = re.search(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", affiliation_text)
+                    if email_match:
+                        corresponding_email = email_match.group(0)  # Store first detected email
+
                     if is_company_affiliation(affiliation_text):
                         company_authors.append(author_name)
                         company_names.append(affiliation_text)
@@ -112,7 +118,8 @@ def fetch_paper_details(paper_ids: List[str]) -> List[Dict[str, Optional[str]]]:
                 "Title": title,
                 "Publication Date": publication_date,
                 "Non-academic Authors": company_authors if company_authors else ["N/A"],
-                "Company Affiliations": company_names if company_names else ["N/A"]
+                "Company Affiliations": company_names if company_names else ["N/A"],
+                "Corresponding Author Email": corresponding_email  # Include email field
             })
 
         return papers
