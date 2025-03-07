@@ -73,17 +73,21 @@ research-paper-fetcher/
 
 ## 🔍 System Design & Workflow
 
-- 1️⃣ Fetching Paper IDs from PubMed
-Uses PubMed esearch.fcgi API to retrieve relevant paper IDs based on the search term.
-- 2️⃣ Fetching Paper Details
-Calls efetch.fcgi API to get paper metadata.
-Extracts title, publication date, authors, and affiliations.
-- 3️⃣ Filtering Company-Affiliated Authors
-Identifies company affiliations using keywords (Inc., Ltd., Pharma).
-Excludes university and research-based affiliations.
-- 4️⃣ Output & Storage
-Displays filtered results in JSON format.
-Saves results to CSV (if requested by the user).
+### **1️⃣ Fetching Paper IDs from PubMed**
+- Uses **PubMed `esearch.fcgi` API** to retrieve **relevant paper IDs** based on the search term.
+
+### **2️⃣ Fetching Paper Details**
+- Calls **`efetch.fcgi` API** to get **paper metadata**.
+- Extracts **title, publication date, authors, and affiliations**.
+
+### **3️⃣ Filtering Company-Affiliated Authors**
+- Identifies **company affiliations** using keywords (`Inc., Ltd., Pharma`).
+- Excludes **university and research-based affiliations**.
+
+### **4️⃣ Output & Storage**
+- Displays **filtered results in JSON format**.
+- Saves results to **CSV (if requested by the user)**.
+
 
 ## ✅ Functional Requirements
 
