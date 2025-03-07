@@ -8,11 +8,15 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "requests (>=2.32.3,<3.0.0)",
+    "pandas (>=2.2.3,<3.0.0)"
 ]
 
 [tool.poetry]
 packages = [{include = "research_paper_fetcher", from = "src"}]
 
+[tool.poetry.scripts]
+get-papers-list = "research_paper_fetcher.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
