@@ -29,7 +29,11 @@ cd research-paper-fetcher
 ```bash
 poetry install
 ```
-
+###  **4️⃣ Install from TestPyPI**
+You can also install the package directly from TestPyPI using the following command:
+```bash
+pip install --index-url https://test.pypi.org/simple/ research-paper-fetcher --no-cache-dir
+```
 ## 🛠️ Usage
 
 ### 🖥️ CLI Options
