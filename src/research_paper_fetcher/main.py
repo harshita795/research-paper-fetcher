@@ -6,9 +6,18 @@ from typing import List
 def save_to_csv(filename: str, data: List[dict]) -> None:
     """Save research papers data to a CSV file."""
     try:
+        # Include 'Corresponding Author Email' in the fieldnames
+        fieldnames = ["PubmedID", "Title", "Publication Date", "Non-academic Authors", "Company Affiliations", "Corresponding Author Email"]
+
         with open(filename, mode="w", newline="", encoding="utf-8") as file:
-            writer = csv.DictWriter(file, fieldnames=["PubmedID", "Title", "Publication Date", "Non-academic Authors", "Company Affiliations"])
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
+            
+            # Ensure each paper contains 'Corresponding Author Email'
+            for paper in data:
+                if 'Corresponding Author Email' not in paper:
+                    paper['Corresponding Author Email'] = 'N/A'  # or some default value
+
             writer.writerows(data)
         print(f"Results saved to {filename}")
     except IOError as e:
