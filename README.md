@@ -108,6 +108,14 @@ research-paper-fetcher/
 - **Regular Expressions (`re` module)** → Extracts emails from author affiliations.
 - **Python Standard Libraries** → Used for JSON processing, error handling, and file operations.
 
+## 🧠 Use of LLM (Large Language Models)
+This project was built independently; however, LLMs (like ChatGPT) were used for:
+- Improving documentation clarity.
+- Debugging minor Python issues.
+- Structuring the CLI arguments and error handling.
+
+All coding logic, implementation, and testing were done manually, with LLM assistance primarily for optimization and explanation.
+
 ## ✅ Functional Requirements
 
 - ✔ Fetch research papers based on a search query.
