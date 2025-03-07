@@ -1,3 +1,14 @@
-"venv/"  
-"poetry.lock"  
-"__pycache__/" 
+venv/ 
+poetry.lock  
+
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Poetry virtual environment
+.research-paper-fetcher-py3.13
+
+# Ignore VS Code settings
+.vscode/
